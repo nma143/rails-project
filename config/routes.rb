@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   root "static#home"
   get "/login", to: "sessions#new"
   post "/sessions/create", to: "sessions#create"
-  
+  get "/signup", to: "users#new"
+  resources :users
 end
