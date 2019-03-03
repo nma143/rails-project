@@ -2,28 +2,35 @@
 
 <p><i>(You can only add a new review for a book you haven't reviewed yet)</i></p>
 <% if @books_to_review.size >= 1 %>
-  <form action="/reviews/new" method="POST">
-    <label for="book_id">Select a book:</label>
-    <select name="book_id">
+  <%= form_for @review do |f| %>
+
+    <%= f.label :book_id, "Select a book:" %>
+    <%= f.select(:book_id) do %>
       <% @books_to_review.each do |book| %>
-          <option value=<%= book.id %>><%= book.title %></option>
+        <%= content_tag(:option, book.title, value: book.id ) %>
       <% end %>
-    </select>
+    <% end %>
+
     <br>
     <br>
-    <label for="stars">How many stars?:</label><br>
-    <input type="radio" name="stars" value="0" checked = "checked"> 0 Stars<br>
-    <input type="radio" name="stars" value="1"> 1 Star<br>
-    <input type="radio" name="stars" value="2"> 2 Stars<br>
-    <input type="radio" name="stars" value="3"> 3 Stars
+
+    <%= f.label :stars, "How many stars?:" %><br>
+    <%= f.radio_button :stars, '0', :checked => true %> 0 Stars<br>
+    <%= f.radio_button :stars, '1' %> 1 Star<br>
+    <%= f.radio_button :stars, '2' %> 2 Stars<br>
+    <%= f.radio_button :stars, '3' %> 3 Stars<br>
+
     <br>
     <br>
-    <label for="content">What did you think?:</label><br>
-    <textarea name="content" rows="5" cols="40" style="resize:none;"></textarea>
+
+    <%= f.label :content, "What did you think?:" %><br>
+    <%= f.text_area(:content, size: '50x5') %>
+
     <br>
     <br>
-    <button type="submit" value="submit">Submit Review</button>
-  </form>
+
+    <%= f.submit "Submit Review" %>
+  <% end %>
 <% else %>
   <p>You have already reviewed all the books</p>
 
