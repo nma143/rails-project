@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+before_action :set_user, only: [:show]
 
   def new
     @user = User.new
@@ -18,7 +19,12 @@ class UsersController < ApplicationController
 
   def show
 
-    
+    if session[:user_id] == @user.id
+      render :show
+    else
+      raise "You're  not that person"
+    end
+
 
   end
 
@@ -31,6 +37,10 @@ class UsersController < ApplicationController
       :password
     )
 
+  end
+
+  def set_user
+    @user = User.find(params[:id])
   end
 
 
