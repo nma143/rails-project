@@ -2,7 +2,24 @@
 
 <ul>
 <li><a href="/reviews/new">Write a new review</a></li>
-<li><a href="/">Back to main page</a></li>
+<li><a href="/books">See book list</a></li>
 <li><%= link_to "Log Out", logout_path, method: :delete %></li>
-
 </ul>
+
+<h2> Here are your reviews, <%= @user.username %>: </h2>
+<% if @user.reviews.length ==0 %>
+  <p>(You have not written a review yet)</p>
+
+<% else %>
+  <% @user.reviews.each do |review| %>
+    <div>
+      <p><b><%= review.book.title %></b> <font size="-1">(by <%= review.book.author %>)</font></p>
+      <ul>
+      <li><p>Star Rating: <%= review.stars %></p></li>
+      <li><p>Content: <%= review.content %></p></li>
+      <li><a href="/reviews/<%=review.id %>">Go to review page</a></li>
+      </ul>
+    </div>
+  <% end %>
+
+<% end %>
