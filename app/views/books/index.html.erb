@@ -1,0 +1,15 @@
+<h2> Here's our book list: </h2>
+
+<% if @books.length==0 %>
+  <p>
+    (There are no books yet)
+  </p>
+<% else %>
+  <ul>
+  <% @books.each do |book| %>
+      <li><%= book.title %> <font size="-1">(by <%= book.author %>)</font>
+      - Avg Star Rating: N/A
+      </li>
+  <% end %>
+  </ul>
+<% end %>
