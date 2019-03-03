@@ -1,11 +1,11 @@
 <h3>Log In:</h3>
 <%= form_for @user, :url => url_for(:controller => 'sessions', :action => 'create') do |f| %>
 
-    <%= f.label :name, "Username:" %>
+    <%= f.label :username, "Username:" %>
     <%= f.text_field :username %><br>
 
-    <%= f.label :password, "Email:" %>
-    <%= f.password_field :email%><br>
+    <%= f.label :email, "Email:" %>
+    <%= f.text_field :email%><br>
 
     <%= f.label :password, "Password:" %>
     <%= f.password_field :password%>
