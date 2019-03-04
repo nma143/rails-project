@@ -1,9 +1,10 @@
 class ReviewsController < ApplicationController
 before_action :set_review, only: [:show, :edit]
+before_action :set_books_to_review, only: [:new, :edit]
+
 
   def new
     @review = Review.new
-    @books_to_review = Book.all - current_user.books
   end
 
   def create
@@ -39,12 +40,19 @@ before_action :set_review, only: [:show, :edit]
 
 
   def edit
+    # nned to have the current book for the review in the select input as well
+    # as any book that the user has yet to review 
+    @books_to_review << @review.book
   end
 
   private
 
   def set_review
     @review = Review.find(params[:id])
+  end
+
+  def set_books_to_review
+    @books_to_review = Book.all - current_user.books
   end
 
 end

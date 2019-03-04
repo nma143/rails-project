@@ -1,0 +1,29 @@
+<%= form_for @review do |f| %>
+
+  <%= f.label :book_id, "Select a book:" %>
+  <%= f.select(:book_id) do %>
+    <% @books_to_review.each do |book| %>
+      <%= content_tag(:option, book.title, value: book.id ) %>
+    <% end %>
+  <% end %>
+
+  <br>
+  <br>
+
+  <%= f.label :stars, "How many stars?:" %><br>
+  <%= f.radio_button :stars, '0', :checked => true %> 0 Stars<br>
+  <%= f.radio_button :stars, '1' %> 1 Star<br>
+  <%= f.radio_button :stars, '2' %> 2 Stars<br>
+  <%= f.radio_button :stars, '3' %> 3 Stars<br>
+
+  <br>
+  <br>
+
+  <%= f.label :content, "What did you think?:" %><br>
+  <%= f.text_area(:content, size: '50x5') %>
+
+  <br>
+  <br>
+
+  <%= f.submit %>
+<% end %>
