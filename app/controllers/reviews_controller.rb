@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-before_action :set_review, only: [:show]
+before_action :set_review, only: [:show, :edit]
 
   def new
     @review = Review.new
@@ -35,6 +35,10 @@ before_action :set_review, only: [:show]
       render :show
     end
 
+  end
+
+
+  def edit
   end
 
   private

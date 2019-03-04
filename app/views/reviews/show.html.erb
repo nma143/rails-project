@@ -4,4 +4,7 @@
 <p><b>Star Rating:</b> <%= @review.stars %></p>
 <p><b>Content:</b> <%= @review.content %></p>
 <br>
-<%= link_to "Delete Review", review_path, method: :delete %>
+<%= link_to "Delete Review", review_path, method: :delete %><br>
+<%= link_to "Edit Review", edit_review_path, method: :get %><br>
+<%= link_to "Back to your reviews", user_path(current_user), method: :get %><br>
+<%= link_to "See book list", books_path, method: :get %>
