@@ -1,0 +1,7 @@
+<p> Here is a particular review by <%= @review.user.username %>: <p>
+<p><b>Book:</b> <%= @review.book.title %></p>
+<p><b>Author:</b> <%= @review.book.author %></p>
+<p><b>Star Rating:</b> <%= @review.stars %></p>
+<p><b>Content:</b> <%= @review.content %></p>
+<br>
+<%= link_to "Delete Review", review_path, method: :delete %>

@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+before_action :set_review, only: [:show]
 
   def new
     @review = Review.new
@@ -20,5 +21,26 @@ class ReviewsController < ApplicationController
 
   end
 
+
+  def show
+
+  end
+
+  def destroy
+    @review = Review.find_by_id(params[:id])
+    if @review && @review.user == current_user
+      @review.delete
+      redirect_to user_path(current_user)
+    else
+      render :show
+    end
+
+  end
+
+  private
+
+  def set_review
+    @review = Review.find(params[:id])
+  end
 
 end
