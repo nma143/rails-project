@@ -6,12 +6,16 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(:content => params[:content], :stars => params[:stars], :user_id => session[:user_id], :book_id => params[:book_id])
+
+    @review = Review.new(:content => params[:review][:content],
+                          :stars => params[:review][:stars],
+                          :user_id => session[:user_id],
+                          :book_id => params[:review][:book_id])
 
     if @review.save
       redirect_to user_path(current_user)
     else
-      render :new
+      redirect_to new_review_path
     end
 
   end
