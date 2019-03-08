@@ -2,6 +2,7 @@
 <%= form_for @user do |f| %>
   <% if @user.errors.any? %>
     <div>
+      <h4 class="errorheading">There were some errors:</h4>
       <ul>
         <% @user.errors.full_messages.each do |message| %>
           <li><%= message %></li>

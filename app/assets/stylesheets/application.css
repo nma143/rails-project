@@ -14,7 +14,13 @@
  *= require_self
  */
 
- .field_with_errors {
-   background-color: #ff9999;
-   display: inline-block;
- }
+.field_with_errors {
+  background-color: #ff9999;
+  display: inline-block;
+}
+
+.errorheading {
+  background-color: #ff9999;
+  display: inline-block;
+  margin: 0;
+}
