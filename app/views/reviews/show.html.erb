@@ -1,3 +1,10 @@
+<p>These are your options:</p>
+<ul>
+<li><%= link_to "Back to your reviews", user_path(current_user), method: :get %></li>
+<li><%= link_to "See book list", books_path, method: :get %></li>
+<li><%= link_to "Log out", logout_path, method: :delete %></li>
+</ul>
+
 <p> Here is a particular review by <%= @review.user.username %>: <p>
 <p><b>Book:</b> <%= @review.book.title %></p>
 <p><b>Author:</b> <%= @review.book.author %></p>
@@ -5,6 +12,6 @@
 <p><b>Content:</b> <%= @review.content %></p>
 <br>
 <%= link_to "Delete Review", review_path, method: :delete %><br>
-<%= link_to "Edit Review", edit_review_path, method: :get %><br>
-<%= link_to "Back to your reviews", user_path(current_user), method: :get %><br>
-<%= link_to "See book list", books_path, method: :get %>
+<% if @review.user == current_user %>
+  <%= link_to "Edit Review", edit_review_path, method: :get %><br>
+<% end %>  
