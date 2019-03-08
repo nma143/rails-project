@@ -1,5 +1,12 @@
-<h2> Here's our book list: </h2>
+<p>These are your options:</p>
+<ul>
+<li><%= link_to "Back to your reviews", user_path(current_user), method: :get %></li>
+<li><a href="/reviews/new">Write a new review</a></li>
+<li><%= link_to "Log Out", logout_path, method: :delete %></li>
+</ul>
 
+
+<h2> Here's our book list: </h2>
 <% if @books.length==0 %>
   <p>
     (There are no books yet)
@@ -13,3 +20,7 @@
   <% end %>
   </ul>
 <% end %>
+<footer>
+  <br>
+
+</footer>
