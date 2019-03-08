@@ -11,7 +11,10 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
-      redirect_to login_path, notice: "Invalid Login. Try again."
+      @user=User.new
+      @user.username = params[:user][:username]
+      @notice = "Invalid Login. Try again."
+      render :new
     end
 
   end
