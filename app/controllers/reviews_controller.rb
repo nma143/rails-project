@@ -41,8 +41,17 @@ before_action :set_books_to_review, only: [:new, :edit]
 
   def edit
     # nned to have the current book for the review in the select input as well
-    # as any book that the user has yet to review 
+    # as any book that the user has yet to review
     @books_to_review << @review.book
+  end
+
+  def update
+    @review = Review.find_by_id(params[:id])
+    if @review.update(review_params)
+      redirect_to @review, notice: 'Review was successfully updated'
+    else
+      ender :edit
+    end
   end
 
   private
@@ -55,4 +64,11 @@ before_action :set_books_to_review, only: [:new, :edit]
     @books_to_review = Book.all - current_user.books
   end
 
+  def review_params
+    params.require(:review).permit(
+      :content,
+      :stars,
+      :book_id
+    )
+  end
 end
