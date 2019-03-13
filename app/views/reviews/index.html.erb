@@ -1,0 +1,28 @@
+<p>These are your options:</p>
+<ul>
+<li><%= link_to "Back to your reviews", user_path(current_user), method: :get %></li>
+<li><%= link_to "See book list", books_path, method: :get %></li>
+<li><%= link_to "Log Out", logout_path, method: :delete %></li>
+</ul>
+
+
+<h3> Here are all the reviews for <%= @book.title %> <font size="-1">(by <%= @book.author %>)</font>:</h3>
+<% if @reviews.length ==0 %>
+  <p>(This book has no reviews yet)</p>
+
+<% else %>
+
+  <% @reviews.each do |review| %>
+    <div>
+      <p><b>Review By: <%= review.user.username %></b> </p>
+      <ul>
+      <li><p>Star Rating: <%= review.stars %></p></li>
+      <li><p>Content: <%= review.content %></p></li>
+      <% if current_user.id == review.user.id %>
+        <li><a href="/reviews/<%=review.id %>">Go to review page</a></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<% end %>

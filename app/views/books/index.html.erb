@@ -13,11 +13,19 @@
   </p>
 <% else %>
   <ul>
-  <% @books.each do |book| %>
-      <li><%= book.title %> <font size="-1">(by <%= book.author %>)</font>
-      - Avg Star Rating: N/A
-      </li>
-  <% end %>
+    <% @books.each do |book| %>
+      <% if book.reviews.size >=1 %>
+        <% star_ratings = book.reviews.collect {|review| review.stars} %>
+        <li><%= book.title %> <font size="-1">(by <%= book.author %>)</font>
+        - Avg Star Rating: <%= (star_ratings.sum/star_ratings.size.to_f).round(1) %>
+        - <%= link_to "See Reviews", book_reviews_url(book), method: :get %>
+        </li>
+      <% else %>
+        <li><%= book.title %> <font size="-1">(by <%= book.author %>)</font>
+        - Avg Star Rating: N/A
+        </li>
+      <% end %>
+    <% end %>
   </ul>
 <% end %>
 <footer>

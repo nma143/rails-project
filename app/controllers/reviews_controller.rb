@@ -2,6 +2,11 @@ class ReviewsController < ApplicationController
 before_action :set_review, only: [:show, :edit]
 before_action :set_books_to_review, only: [:new, :edit]
 
+  def index
+    @book = Book.find_by_id(params[:book_id])
+    @reviews = @book.reviews
+  end
+
 
   def new
     @review = Review.new
