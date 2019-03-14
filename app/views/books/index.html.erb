@@ -17,7 +17,12 @@
       <% if book.average_star_rating %>
         <li><%= book.title %> <font size="-1">(by <%= book.author %>)</font>
         - Avg Star Rating: <%= book.average_star_rating %>
-        - <%= link_to "See Reviews", book_reviews_url(book), method: :get %>
+        <% if book.reviews.count == 1 %>
+          <% @link_text = "#{book.reviews.count} Review" %>
+        <% else %>
+          <% @link_text = "#{book.reviews.count} Reviews" %>
+        <% end %>
+        - <%= link_to "#{@link_text}", book_reviews_url(book), method: :get %>
         </li>
       <% else %>
         <li><%= book.title %> <font size="-1">(by <%= book.author %>)</font>

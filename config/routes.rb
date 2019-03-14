@@ -11,4 +11,7 @@ Rails.application.routes.draw do
     resources :reviews, only: [:index]
   end
   resources :reviews, only: [:new, :create, :show, :edit, :destroy, :update]
+
+  get "books/most_reviewed", to: "books#most_reviewed"
+
 end
