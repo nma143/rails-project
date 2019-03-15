@@ -6,20 +6,30 @@
 <li><%= link_to "Log Out", logout_path, method: :delete %></li>
 </ul>
 
-<h2> Here are your reviews, <%= @user.username %>: </h2>
+<h2> Here are your reviews: </h2>
 <% if @user.reviews.length ==0 %>
   <p>(You have not written a review yet)</p>
 
 <% else %>
-  <% @user.reviews.each do |review| %>
-    <div>
-      <p><b><%= review.book.title %></b> <font size="-1">(by <%= review.book.author %>)</font></p>
-      <ul>
-      <li><p>Star Rating: <%= review.stars %></p></li>
-      <li><p>Content: <%= review.content %></p></li>
-      <li><a href="/reviews/<%=review.id %>">Go to review page</a></li>
-      </ul>
-    </div>
-  <% end %>
+  <table>
+
+    <tr>
+    <th>Book</th>
+    <th>Author</th>
+    <th>Stars</th>
+    <th>Content</th>
+    </tr>
+
+    <% @user.reviews.each do |review| %>
+      <tr>
+        <td><%= link_to "#{review.book.title}", book_reviews_url(review.book), method: :get %></td>
+        <td class="center"><%= review.book.author %></td>
+        <td class="center"><%= review.stars %></td>
+        <td><%= review.content %></td>
+        <td class="center white"><a href="/reviews/<%=review.id %>">See your review</a></td>
+      </tr>
+    <% end %>
+
+  </table>
 
 <% end %>
