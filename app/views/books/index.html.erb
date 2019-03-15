@@ -12,31 +12,28 @@
     (There are no books yet)
   </p>
 <% else %>
-  <li><%= link_to "Order by id", books_path, method: :get %></li>
-  <li><%= link_to "Order by Most Reviewed", books_most_reviewed_path, method: :get %></li>
-  <li><%= link_to "Order by Highest Average Start Rating", books_highest_average_path, method: :get %></li>
 
-  <ul>
+  <table>
+
+    <tr>
+    <th><%= link_to "Title", books_path, method: :get %></th>
+    <th>Author</th>
+    <th><%= link_to "Avg Star Rating", books_highest_average_path, method: :get %></th>
+    <th><%= link_to "Number of Reviews", books_most_reviewed_path, method: :get %></th>
+    <th>Your Review</th>
+    </tr>
     <% @books.each do |book| %>
-      <% if book.average_star_rating %>
-        <li><%= book.title %> <font size="-1">(by <%= book.author %>)</font>
-        - Avg Star Rating: <%= book.average_star_rating %>
-        <% if book.reviews.count == 1 %>
-          <% @link_text = "#{book.reviews.count} Review" %>
+      <tr>
+        <td><%= book.title %></td>
+        <td class="center"><%= book.author %></td>
+        <% if book.average_star_rating %>
+          <td class="center"><%= book.average_star_rating %></td>
         <% else %>
-          <% @link_text = "#{book.reviews.count} Reviews" %>
+          <td class="center">N/A</td>
         <% end %>
-        - <%= link_to "#{@link_text}", book_reviews_url(book), method: :get %>
-        </li>
-      <% else %>
-        <li><%= book.title %> <font size="-1">(by <%= book.author %>)</font>
-        - Avg Star Rating: N/A
-        </li>
-      <% end %>
+        <td class="center"><%= link_to "#{book.reviews.count}", book_reviews_url(book), method: :get %></td>
+      </tr>
     <% end %>
-  </ul>
-<% end %>
-<footer>
-  <br>
 
-</footer>
+  </table>
+<% end %>
