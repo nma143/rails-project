@@ -2,7 +2,7 @@ class BooksController < ApplicationController
 before_action :require_logged_in
 
   def index
-    @books = Book.all
+    @books = Book.order_by_title
   end
 
   def show

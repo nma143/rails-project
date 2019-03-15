@@ -23,4 +23,9 @@ class Book < ApplicationRecord
 
   end
 
+  def self.order_by_title
+    Book.all.sort_by{|book| book.title}
+  end
+
+
 end
