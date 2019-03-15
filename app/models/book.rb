@@ -12,11 +12,10 @@ class Book < ApplicationRecord
   end
 
   def self.order_by_most_reviewed
-    # I want to return all the books that have atleast 1 review - ordered by
-    # number of reviews (most reviewed at top)
+    # I want to return all the books ordered by
+    # number of reviews, then number of stars
 
-    Book.joins("INNER JOIN reviews ON reviews.book_id = books.id").group("books.id").order("COUNT(books.id) desc")
-
+    Book.joins("LEFT JOIN reviews ON reviews.book_id = books.id").group("books.id").order("count(reviews.book_id) desc, sum(reviews.stars) desc")
   end
 
 end
