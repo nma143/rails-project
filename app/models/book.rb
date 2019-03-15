@@ -27,5 +27,9 @@ class Book < ApplicationRecord
     Book.all.sort_by{|book| book.title}
   end
 
+  def self.order_by_author
+    Book.all.sort_by{|book| [book.author, book.title]}
+  end
+
 
 end

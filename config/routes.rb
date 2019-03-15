@@ -14,5 +14,6 @@ Rails.application.routes.draw do
 
   get "books/most_reviewed", to: "books#most_reviewed"
   get "books/highest_average", to: "books#highest_average"
+  get "books/author_order", to: "books#author_order"
 
 end

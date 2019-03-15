@@ -17,7 +17,7 @@
 
     <tr>
     <th><%= link_to "Title", books_path, method: :get %></th>
-    <th>Author</th>
+    <th><%= link_to "Author", books_author_order_path, method: :get %></th>
     <th><%= link_to "Avg Star Rating", books_highest_average_path, method: :get %></th>
     <th><%= link_to "Number of Reviews", books_most_reviewed_path, method: :get %></th>
     <th>Your Review</th>

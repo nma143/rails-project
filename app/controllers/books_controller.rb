@@ -24,5 +24,10 @@ before_action :require_logged_in
     render :index
   end
 
+  def author_order
+    @books = Book.order_by_author
+    render :index
+  end
+
 
 end
