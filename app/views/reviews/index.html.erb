@@ -25,7 +25,7 @@
       <td class="center"><%= review.stars %></td>
       <td><%= review.content %></td>
       <% if current_user.id == review.user.id %>
-        <td class="white"><a href="/reviews/<%=review.id %>">Go to review page</a></td>
+        <td class="white"><a href="/reviews/<%=review.id %>">See your review</a></td>
       <% end %>
     </tr>
     <% end %>

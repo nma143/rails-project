@@ -37,9 +37,9 @@
         <td class="center"><%= link_to "#{book.reviews.count}", book_reviews_url(book), method: :get %></td>
 
         <% if book.users.include?(current_user) %>
-          <td><%= link_to "See Review", review_path(book.reviews.find_by(user_id: current_user.id)), method: :get %></td>
+          <td><%= link_to "See your review", review_path(book.reviews.find_by(user_id: current_user.id)), method: :get %></td>
         <% else %>
-          <td><%= link_to "Create Review", new_review_path, method: :get %></td>
+          <td><%= link_to "Create a review", new_review_path, method: :get %></td>
         <% end %>
       </tr>
     <% end %>
