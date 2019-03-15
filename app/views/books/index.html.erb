@@ -20,18 +20,27 @@
     <th><%= link_to "Author", books_author_order_path, method: :get %></th>
     <th><%= link_to "Avg Star Rating", books_highest_average_path, method: :get %></th>
     <th><%= link_to "Number of Reviews", books_most_reviewed_path, method: :get %></th>
-    <th>Your Review</th>
+    <th>Your Reviews</th>
     </tr>
     <% @books.each do |book| %>
       <tr>
         <td><%= book.title %></td>
+
         <td class="center"><%= book.author %></td>
+
         <% if book.average_star_rating %>
           <td class="center"><%= book.average_star_rating %></td>
         <% else %>
           <td class="center">N/A</td>
         <% end %>
+
         <td class="center"><%= link_to "#{book.reviews.count}", book_reviews_url(book), method: :get %></td>
+
+        <% if book.users.include?(current_user) %>
+          <td><%= link_to "See Review", review_path(book.reviews.find_by(user_id: current_user.id)), method: :get %></td>
+        <% else %>
+          <td><%= link_to "Create Review", new_review_path, method: :get %></td>
+        <% end %>
       </tr>
     <% end %>
 
