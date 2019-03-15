@@ -19,5 +19,10 @@ before_action :require_logged_in
 
   end
 
+  def highest_average
+    @books = Book.order_by_avg_stars
+    render :index
+  end
+
 
 end

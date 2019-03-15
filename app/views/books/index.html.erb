@@ -12,6 +12,10 @@
     (There are no books yet)
   </p>
 <% else %>
+  <li><%= link_to "Order by id", books_path, method: :get %></li>
+  <li><%= link_to "Order by Most Reviewed", books_most_reviewed_path, method: :get %></li>
+  <li><%= link_to "Order by Highest Average Start Rating", books_highest_average_path, method: :get %></li>
+
   <ul>
     <% @books.each do |book| %>
       <% if book.average_star_rating %>
