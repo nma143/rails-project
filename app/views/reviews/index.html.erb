@@ -12,17 +12,24 @@
 
 <% else %>
   <h4> Average Star Rating: <%=@book.average_star_rating%></h4>
-  <% @reviews.each do |review| %>
-    <div>
-      <p><b>Review By: <%= review.user.username %></b> </p>
-      <ul>
-      <li><p>Star Rating: <%= review.stars %></p></li>
-      <li><p>Content: <%= review.content %></p></li>
+  <table>
+
+    <tr>
+    <th>Reviewer</th>
+    <th>Stars</th>
+    <th>Content</th>
+    </tr>
+    <% @reviews.each do |review| %>
+    <tr>
+      <td><%= review.user.username %></td>
+      <td class="center"><%= review.stars %></td>
+      <td><%= review.content %></td>
       <% if current_user.id == review.user.id %>
-        <li><a href="/reviews/<%=review.id %>">Go to review page</a></li>
+        <td class="white"><a href="/reviews/<%=review.id %>">Go to review page</a></td>
       <% end %>
-      </ul>
-    </div>
-  <% end %>
+    </tr>
+    <% end %>
+
+  </table>
 
 <% end %>

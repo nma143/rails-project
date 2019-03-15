@@ -35,8 +35,16 @@ td, th {
   text-align: left;
   padding: 10px;
 }
+
+th {
+  text-align: center;
+}
 .center {
   text-align: center;
+}
+.white {
+  background-color: #ffffff;
+  border: none;
 }
 
 tr:nth-child(even) {
