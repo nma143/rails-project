@@ -12,7 +12,7 @@
     (There are no books yet)
   </p>
 <% else %>
-  <h4> Book Count: <%= @books.count %></h4>
+  <h4> Book Count: <%= @books.size %></h4>
   <table>
 
     <tr>
@@ -39,7 +39,7 @@
         <% if book.users.include?(current_user) %>
           <td><%= link_to "See your review", review_path(book.reviews.find_by(user_id: current_user.id)), method: :get %></td>
         <% else %>
-          <td><%= link_to "Create a review", new_review_path, method: :get %></td>
+          <td class="center"><%= link_to "Add a review", new_review_path, method: :get %></td>
         <% end %>
       </tr>
     <% end %>
