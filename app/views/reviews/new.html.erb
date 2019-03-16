@@ -1,15 +1,3 @@
 <h2>New Review</h2>
 
-<p><i>(You can only add a new review for a book you haven't reviewed yet)</i></p>
-<% if @books_to_review.size >= 1 %>
   <%= render 'form' %>
-<% else %>
-  <p>You have already reviewed all the books</p>
-
-<% end %>
-<footer>
-  <br>
-  <%= link_to "Back to your reviews", user_path(current_user), method: :get %>
-  <br>
-  <%= link_to "See book list", books_path, method: :get %>
-</footer>

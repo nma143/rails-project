@@ -9,7 +9,9 @@ before_action :set_books_to_review, only: [:new, :edit]
 
 
   def new
-    @review = Review.new
+
+    @book = Book.find_by_id(params[:book_id])
+    @review = Review.new(:book => @book)
   end
 
   def create
@@ -17,7 +19,7 @@ before_action :set_books_to_review, only: [:new, :edit]
     @review = Review.new(:content => params[:review][:content],
                           :stars => params[:review][:stars],
                           :user_id => session[:user_id],
-                          :book_id => params[:review][:book_id])
+                          :book_id => params[:book_id])
 
     if @review.save
       redirect_to user_path(current_user)
@@ -45,9 +47,7 @@ before_action :set_books_to_review, only: [:new, :edit]
 
 
   def edit
-    # nned to have the current book for the review in the select input as well
-    # as any book that the user has yet to review
-    @books_to_review << @review.book
+    @book = Book.find_by_id(params[:book_id])
   end
 
   def update

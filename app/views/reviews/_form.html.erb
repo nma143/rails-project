@@ -1,14 +1,6 @@
-<%= form_for @review do |f| %>
+<h4>Book: <%= @book.title%> by <%= @book.author%></h4>
 
-  <%= f.label :book_id, "Select a book:" %>
-  <%= f.select(:book_id) do %>
-    <% @books_to_review.each do |book| %>
-      <%= content_tag(:option, book.title, value: book.id ) %>
-    <% end %>
-  <% end %>
-
-  <br>
-  <br>
+<%= form_for ([@book, @review]) do |f| %>
 
   <%= f.label :stars, "How many stars?:" %><br>
   <%= f.radio_button :stars, '0', :checked => true %> 0 Stars<br>
@@ -27,3 +19,9 @@
 
   <%= f.submit %>
 <% end %>
+<footer>
+  <br>
+  <%= link_to "See your reviews", user_path(current_user), method: :get %>
+  <br>
+  <%= link_to "See book list", books_path, method: :get %>
+</footer>
