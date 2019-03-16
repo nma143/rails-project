@@ -25,7 +25,7 @@
       <td class="center"><%= review.stars %></td>
       <td><%= review.content %></td>
       <% if current_user.id == review.user.id %>
-        <td class="white"><a href="/reviews/<%=review.id %>">See your review</a></td>
+        <td class="white"><%= link_to "Edit", edit_book_review_path(@book, review), method: :get %> or <%= link_to "Delete", review_path(review), method: :delete %> your review</td>
       <% end %>
     </tr>
     <% end %>
