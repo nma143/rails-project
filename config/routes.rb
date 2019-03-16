@@ -8,9 +8,9 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :create]
 
   resources :books, only: [:index] do
-    resources :reviews, only: [:index, :new, :create, :edit]
+    resources :reviews, only: [:index, :new, :create, :edit, :update]
   end
-  resources :reviews, only: [:show, :edit, :destroy, :update]
+  resources :reviews, only: [:show, :destroy]
 
   get "books/most_reviewed", to: "books#most_reviewed"
   get "books/highest_average", to: "books#highest_average"

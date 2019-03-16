@@ -1,6 +1,5 @@
 class ReviewsController < ApplicationController
 before_action :set_review, only: [:show, :edit]
-before_action :set_books_to_review, only: [:new, :edit]
 
   def index
     @book = Book.find_by_id(params[:book_id])
@@ -48,6 +47,8 @@ before_action :set_books_to_review, only: [:new, :edit]
 
   def edit
     @book = Book.find_by_id(params[:book_id])
+    @review = Review.find_by_id(params[:id])
+
   end
 
   def update
@@ -65,15 +66,10 @@ before_action :set_books_to_review, only: [:new, :edit]
     @review = Review.find(params[:id])
   end
 
-  def set_books_to_review
-    @books_to_review = Book.all - current_user.books
-  end
-
   def review_params
     params.require(:review).permit(
       :content,
       :stars,
-      :book_id
     )
   end
 end

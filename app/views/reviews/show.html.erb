@@ -13,5 +13,5 @@
 <br>
 <%= link_to "Delete Review", review_path, method: :delete %><br>
 <% if @review.user == current_user %>
-  <%= link_to "Edit Review", edit_review_path, method: :get %><br>
-<% end %>  
+  <%= link_to "Edit Review", edit_book_review_path(@review.book, @review), method: :get %><br>
+<% end %>

@@ -1,7 +1,6 @@
 <h2> Hi <%= @user.username %> </h2>
 
 <ul>
-<li><a href="/reviews/new">Write a new review</a></li>
 <li><a href="/books">See book list</a></li>
 <li><%= link_to "Log Out", logout_path, method: :delete %></li>
 </ul>
