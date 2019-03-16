@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+before_action :require_logged_in, only: [:show]
 before_action :set_user, only: [:show]
 
   def new
@@ -19,13 +20,6 @@ before_action :set_user, only: [:show]
 
   def show
 
-    if session[:user_id] == @user.id
-      render :show
-    else
-      raise "You're  not that person"
-    end
-
-
   end
 
   private
@@ -40,7 +34,8 @@ before_action :set_user, only: [:show]
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find_by_id(params[:id])
+    redirect_to user_path(current_user), alert: "You're not that person" unless current_user==@user
   end
 
 
