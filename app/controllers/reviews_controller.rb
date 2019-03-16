@@ -28,18 +28,13 @@ before_action :set_review, only: [:show, :edit]
 
   end
 
-
-  def show
-
-  end
-
   def destroy
     @review = Review.find_by_id(params[:id])
     if @review && @review.user == current_user
       @review.delete
       redirect_to user_path(current_user)
     else
-      render :show
+      # put some error handling here
     end
 
   end
@@ -54,7 +49,7 @@ before_action :set_review, only: [:show, :edit]
   def update
     @review = Review.find_by_id(params[:id])
     if @review.update(review_params)
-      redirect_to @review, notice: 'Review was successfully updated'
+      redirect_to user_path(current_user)
     else
       ender :edit
     end

@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :books, only: [:index] do
     resources :reviews, only: [:index, :new, :create, :edit, :update]
   end
-  resources :reviews, only: [:show, :destroy]
+  resources :reviews, only: [:destroy]
 
   get "books/most_reviewed", to: "books#most_reviewed"
   get "books/highest_average", to: "books#highest_average"
