@@ -37,7 +37,8 @@
         <td class="center"><%= link_to "#{book.reviews.count}", book_reviews_url(book), method: :get %></td>
 
         <% if book.users.include?(current_user) %>
-          <td><%= link_to "See your review", review_path(book.reviews.find_by(user_id: current_user.id)), method: :get %></td>
+          <% review = book.reviews.find_by(user_id: current_user.id) %>
+          <td><%= link_to "Edit", edit_book_review_path(book, review), method: :get %> or <%= link_to "Delete", review_path(review), method: :delete %> your review</td>
         <% else %>
           <td class="center"><%= link_to "Add a review", new_book_review_path(book), method: :get %></td>
         <% end %>
