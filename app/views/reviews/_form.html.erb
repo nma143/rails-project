@@ -2,6 +2,17 @@
 
 <%= form_for ([@book, @review]) do |f| %>
 
+  <% if @review.errors.any? %>
+    <div>
+      <h4 class="errorheading">There were some errors:</h4>
+      <ul>
+        <% @review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= f.label :stars, "How many stars?:" %><br>
   <%= f.radio_button :stars, '0', :checked => true %> 0 Stars<br>
   <%= f.radio_button :stars, '1' %> 1 Star<br>

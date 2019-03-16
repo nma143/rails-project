@@ -11,6 +11,11 @@
 
   <body>
      <h1>This is our Book Club!</h1>
+     <% if flash[:notice] %>
+       <p style="color:green;"><%= flash[:notice] %></p>
+     <% elsif flash[:alert] %>
+       <p style="color:red;"><%= flash[:alert] %></p>
+     <% end %>
     <%= yield %>
   </body>
 </html>

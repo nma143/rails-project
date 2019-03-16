@@ -15,10 +15,12 @@
  */
 
 .field_with_errors {
-  background-color: #ff9999;
   display: inline-block;
 }
 
+.field_with_errors > label {
+  background-color: #ff9999;
+}
 .errorheading {
   background-color: #ff9999;
   display: inline-block;

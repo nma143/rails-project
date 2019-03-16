@@ -25,7 +25,7 @@
         <td class="center"><%= review.book.author %></td>
         <td class="center"><%= review.stars %></td>
         <td><%= review.content %></td>
-        <td class="center white"><%= link_to "Edit", edit_book_review_path(review.book, review), method: :get %> or <%= link_to "Delete", review_path(review), method: :delete %></td>  
+        <td class="center white"><%= link_to "Edit", edit_book_review_path(review.book, review), method: :get %> or <%= link_to "Delete", review_path(review), method: :delete %></td>
       </tr>
     <% end %>
 

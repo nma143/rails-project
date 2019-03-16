@@ -20,9 +20,10 @@ before_action :set_book, only: [:index, :new, :edit]
                           :book_id => params[:book_id])
 
     if @review.save
-      redirect_to user_path(current_user)
+      redirect_to user_path(current_user), notice: "Review successfully saved"
     else
-      redirect_to new_review_path
+      set_book
+      render :new
     end
 
   end
@@ -30,9 +31,9 @@ before_action :set_book, only: [:index, :new, :edit]
   def destroy
     if @review && @review.user == current_user
       @review.delete
-      redirect_to user_path(current_user)
+      redirect_to user_path(current_user), notice: "Review successfully deleted"
     else
-      # put some error handling here
+      redirect_to user_path(current_user), alert: "Review not deleted"
     end
 
   end
@@ -44,8 +45,9 @@ before_action :set_book, only: [:index, :new, :edit]
 
   def update
     if @review.update(review_params)
-      redirect_to user_path(current_user)
+      redirect_to user_path(current_user), notice: "Review successfully updated"
     else
+      set_book
       render :edit
     end
   end
