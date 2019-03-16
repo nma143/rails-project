@@ -1,16 +1,15 @@
 class ReviewsController < ApplicationController
-before_action :set_review, only: [:show, :edit]
+before_action :require_logged_in
+before_action :set_review, only: [:edit, :update, :destroy]
+before_action :set_book, only: [:index, :new, :edit]
 
   def index
-    @book = Book.find_by_id(params[:book_id])
     @reviews = @book.reviews
   end
 
 
   def new
-
-    @book = Book.find_by_id(params[:book_id])
-    @review = Review.new(:book => @book)
+    @review = Review.new
   end
 
   def create
@@ -29,7 +28,6 @@ before_action :set_review, only: [:show, :edit]
   end
 
   def destroy
-    @review = Review.find_by_id(params[:id])
     if @review && @review.user == current_user
       @review.delete
       redirect_to user_path(current_user)
@@ -41,17 +39,14 @@ before_action :set_review, only: [:show, :edit]
 
 
   def edit
-    @book = Book.find_by_id(params[:book_id])
-    @review = Review.find_by_id(params[:id])
 
   end
 
   def update
-    @review = Review.find_by_id(params[:id])
     if @review.update(review_params)
       redirect_to user_path(current_user)
     else
-      ender :edit
+      render :edit
     end
   end
 
@@ -59,6 +54,10 @@ before_action :set_review, only: [:show, :edit]
 
   def set_review
     @review = Review.find(params[:id])
+  end
+
+  def set_book
+    @book = Book.find_by_id(params[:book_id])
   end
 
   def review_params
