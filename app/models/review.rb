@@ -10,7 +10,7 @@ class Review < ApplicationRecord
 
   def user_has_not_reviewed_book_already
     if Review.find_by(user_id: user_id, book_id: book_id)
-      errors.add(:book_id, "user already reviewed this book")
+      errors.add(:user_id, "already reviewed this book")
     end
   end
 
