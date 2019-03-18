@@ -6,27 +6,31 @@ class SessionsController < ApplicationController
 
   def create
 
-    if auth_hash = request.env["omniauth.auth"]
+    if auth_hash = request.env["omniauth.auth"] #log in via facebook
 
-      email = auth_hash[:extra][:raw_info][:email]
-      name = auth_hash[:extra][:raw_info][:name] #e.g. Jane Smith
+      auth_email = auth_hash[:extra][:raw_info][:email]
 
       # If not first time this email has been used to log in, just log them in
-      if user = User.find_by(:email => email)
-        raise "You already exist"
-        session[:user_id] = @user.id
-        redirect_to user_path(@user)
+      if user = User.find_by(:email => auth_email)
+        session[:user_id] = user.id
+        redirect_to user_path(user.id)
 
       # If this is the first time this email has been used:
-      # create a user with facebook email, change facebook user name to meet db requirements, and give fake password
+      # create a user with the auth_email, make a username for them, and give fake password
       else
-        user = User.new
-        auto_username = user.create_username(name) 
+
+        auto_username = User.create_username_from_email(auth_email)
         fake_password = SecureRandom.hex
-        raise "You don't exist"
+        user = User.new(username: auto_username, email: auth_email, password: fake_password)
+        if user.save
+          session[:user_id] = user.id
+          redirect_to user_path(user.id)
+        else
+          render :new
+        end
       end
 
-    else
+    else #regular log in
       @user = User.find_by(username: params[:user][:username])
       if @user && @user.authenticate(params[:user][:password])
         session[:user_id] = @user.id
