@@ -17,11 +17,26 @@ class User < ApplicationRecord
   validates :username, uniqueness:  true
   validates :email, uniqueness:  true
 
-  def self.create_username_from_email(email)
-    # used when user is created via a facebook login
+  def self.find_or_create_by_omniauth(auth_hash)
 
+    auth_email = auth_hash[:extra][:raw_info][:email]
+
+    if user = self.find_by(:email => auth_email)
+      # User already in db, then can just be logged in
+      return user
+    else
+      # This is the first time this email has been used
+      # Create a user with the auth_email, make a username for them, and give fake password
+      auto_username = self.create_username_from_email(auth_email)
+      fake_password = SecureRandom.hex
+      user = self.create(username: auto_username, email: auth_email, password: fake_password)
+    end
+
+  end
+
+  def self.create_username_from_email(email)
     # get a starting point for the username from the email
-    # if can't get something to work with from the email, just use anonymous
+    # if can't get something from the email, just use anonymous
     email_root = email.split("@")[0]
     username_root = /[a-z0-9]+/.match(email_root)[0] if /[a-z0-9]+/.match(email_root)
     username_root ||= "anonymous"
@@ -31,23 +46,10 @@ class User < ApplicationRecord
     # If not, add a suffix that results in unquie username
     suffix = 0
     username = username_root
-    loop do
-      user = self.new(username: username)
-      user.validate_username
-      if user.errors[:username].include?("has already been taken")
-        suffix = suffix + 1
-        username = username_root + suffix.to_s
-      else
-        break
-      end
+    while self.find_by(username: username) do
+      suffix = suffix + 1
+      username = username_root + suffix.to_s
     end
     username
   end
-
-    def validate_username
-      self.class.validators_on(:username).each do |validator|
-        validator.validate_each(self, :username, self.username)
-      end
-    end
-
 end
