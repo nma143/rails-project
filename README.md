@@ -18,9 +18,13 @@
 
 ## Installation
 
-To use this app, just clone, run `rake db:migrate`, `rake db:seed` (to create the library of books), and then run `shotgun`.
+To use this app:
 
-(If you have your own list of books, change the default seed file)
+* Clone repo
+* Run `rake db:migrate`
+* If you have your own list of books, change the default db/seeds.rb file.
+* Run `rake db:seed` (to create the library of books)
+* Launch the app by starting a sever with `rails s` 
 
 
 ## Contributor's Guide
