@@ -16,4 +16,6 @@ Rails.application.routes.draw do
   get "books/highest_average", to: "books#highest_average"
   get "books/author_order", to: "books#author_order"
 
+
+  get '/auth/facebook/callback' => 'sessions#create'
 end
