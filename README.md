@@ -5,15 +5,15 @@
 
 ## Description
 
-This app can be used to manage a book club.
-Users can sign up to the book club to make an account. Logging in is required.
-Users can use Facebook to create their Book Club user profile, and/or log in.
-The book club has a set library of books.
-Each user can submit one review for each book.
-A user can also edit and/or delete reviews they have written.
-A user can not edit and/or delete reviews written by another user.
-Users can see all the reviews for a particular book, and also the average star rating for a book.
-Users can also sort the book list by book title, author, average star rating, and number of reviews.
+* This app can be used to manage a book club.
+* Users can sign up to the book club to make an account. Logging in is required.
+* Users can use Facebook to create their Book Club user profile, and/or log in.
+* The book club has a set library of books.
+* Each user can submit one review for each book.
+* A user can also edit and/or delete reviews they have written.
+* A user can not edit and/or delete reviews written by another user.
+* Users can see all the reviews for a particular book, and also the average star rating for a book.
+* Users can also sort the book list by book title, author, average star rating, and number of reviews.
 
 
 ## Installation
